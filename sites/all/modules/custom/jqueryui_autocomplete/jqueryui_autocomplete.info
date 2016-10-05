@@ -1,0 +1,3 @@
+name = Autocomplete UI Test module
+description = Simple autocompete UI
+core = 7.x

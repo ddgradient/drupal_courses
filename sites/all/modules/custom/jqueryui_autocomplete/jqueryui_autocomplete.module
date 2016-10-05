@@ -1,0 +1,49 @@
+<?php
+
+/**
+ * @file jqueryui_autocomplete.module
+ */
+
+/**
+ * Implements hook_menu()
+ */
+function jqueryui_autocomplete_menu() {
+  $items['test/form'] = array(
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('jqueryui_autocomplete_test_form'),
+    'access arguments' => array('access content'),
+  );
+  $items['test/autocomplete'] = array(
+    'page callback' => 'jqueryui_autocomplete_autocomplete',
+    'access arguments' => array('access content'),
+  );
+  return $items;
+}
+
+/**
+ * Form builder
+ */
+function jqueryui_autocomplete_test_form() {
+  $form['title'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Title',
+  );
+
+  $form['#attached']['library'][] = array('system', 'ui.autocomplete');
+  $form['#attached']['js'][] = drupal_get_path('module', 'jqueryui_autocomplete') . '/js/jqueryui_autocomplete.js';
+
+  return $form;
+}
+
+/**
+ * Menu callback
+ */
+function jqueryui_autocomplete_autocomplete($string) {
+  $titles = db_select('node', 'n')
+    ->fields('n', array('title'))
+    ->condition('n.title', '%' . db_like($string) . '%', 'LIKE')
+    ->execute()
+    ->fetchCol();
+
+  drupal_json_output($titles);
+}
