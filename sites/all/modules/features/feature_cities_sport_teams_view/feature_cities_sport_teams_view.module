@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Feature cities sport teams view feature.
+ */
+
+include_once 'feature_cities_sport_teams_view.features.inc';
