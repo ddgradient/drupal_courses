@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Feature content type sport teams feature.
+ */
+
+include_once 'feature_content_type_sport_teams.features.inc';
